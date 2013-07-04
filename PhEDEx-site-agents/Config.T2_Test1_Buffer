@@ -1,0 +1,70 @@
+#### General configuration
+### ENVIRON common
+#export PHEDEX_GLITE_DEBUG=1;
+
+# Common part
+PHEDEX_SITE=T2_Test1;
+PHEDEX_NODE=${PHEDEX_SITE}_Buffer;
+PHEDEX_CONTEXT=${PHEDEX_SITE};
+
+# For the watchdog. Every different site must have a unique port number if you
+# are running more than one site per machine
+PHEDEX_NOTIFICATION_PORT=22101;
+export PHEDEX_NOTIFICATION_PORT;
+
+# FTS specific part
+TIER1_FTS_SERVER=https://fts-t1-import.cern.ch:8443/glite-data-transfer-fts/services/FileTransfer;
+export TIER1_FTS_SERVER;
+
+export PHEDEX_ANSE=/data/wildish/ANSE-sites
+PHEDEX_MAP=${PHEDEX_ANSE}/tfc.xml;
+export PHEDEX_MAP;
+
+PHEDEX_GLITE_WRAPPER=${LIFECYCLE_ROOT}/Testbed/FakeFTS.pl;
+export PHEDEX_GLITE_WRAPPER;
+
+### IMPORT ConfigPart.Testbed
+
+### AGENT LABEL=watchdog PROGRAM=Utilities/AgentFactory.pl
+ -db         ${PHEDEX_DBPARAM}
+ -config     ${PHEDEX_CONFIG_FILE}
+ -agent_list exp-pfn
+ -agent_list download-fts
+ -agent_list remove
+
+### AGENT LABEL=exp-pfn PROGRAM=Toolkit/Transfer/FileExport
+ -db          ${PHEDEX_DBPARAM}
+ -nodes       ${PHEDEX_NODE}
+ -storagemap  ${PHEDEX_MAP}
+ -protocols   'srm','direct'
+
+### AGENT LABEL=download PROGRAM=Toolkit/Transfer/FileDownload DEFAULT=off
+ -verbose
+ -db              ${PHEDEX_DBPARAM}
+ -accept	  '%Test%'
+ -nodes           ${PHEDEX_NODE}
+ -validate        ${PHEDEX_CONFIG}/fake-validate.pl
+ -delete          ${PHEDEX_CONFIG}/fake-delete.pl
+ -backend         Null
+ -jobs            10
+
+### AGENT LABEL=remove PROGRAM=Toolkit/Transfer/FileRemove DEFAULT=off
+ -db              ${PHEDEX_DBPARAM}
+ -nodes           ${PHEDEX_NODE}
+ -delete          ${PHEDEX_CONFIG}/fake-delete.pl
+ -protocol        'direct'
+ -limit		  1000
+ -jobs		  20
+
+### AGENT LABEL=download-fts PROGRAM=Toolkit/Transfer/FileDownload
+ -db                    ${PHEDEX_DBPARAM}
+ -nodes                 ${PHEDEX_NODE}
+ -accept                '%'
+ -validate              ${PHEDEX_CONFIG}/fake-validate.pl
+ -backend               FTS
+ -protocols             'srm'
+ -service               ${TIER1_FTS_SERVER}
+ -batch-files           50
+ -link-pending-files    200
+ -jobs			2
+ -job-awol		300
