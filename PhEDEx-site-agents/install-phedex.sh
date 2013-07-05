@@ -59,7 +59,7 @@ cd $sw/$SCRAM_ARCH/cms/$PHEDEX_PKG
 version=`ls -1 | tail -1`
 mv $version $version.rpm-installed
 branch=`echo $version | sed -e 's%-.*$%%'`
-git clone -b $branch git@github.com:dmwm/PHEDEX.git PHEDEX-git
+git clone -b $branch https://github.com/dmwm/PHEDEX PHEDEX-git
 ln -s PHEDEX-git $version
 cd $version
 git checkout -b ANSE
@@ -71,7 +71,7 @@ cd $sw/$SCRAM_ARCH/cms/PHEDEX-lifecycle
 version=`ls -1 | tail -1`
 mv $version $version.rpm-installed
 version=`echo $version | sed -e 's%-.*$%%'`
-git clone -b PHEDEX-LifeCycle git@github.com:dmwm/PHEDEX.git LifeCycle-git
+git clone -b PHEDEX-LifeCycle https://github.com/dmwm/PHEDEX LifeCycle-git
 ln -s LifeCycle-git $version
 cd $version
 git checkout -b ANSE
