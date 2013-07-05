@@ -2,6 +2,7 @@
 
 # What PhEDEx package do I want?
 PHEDEX_PKG=PHEDEX
+PHEDEX_RPM=PHEDEX.PHEDEX
 
 # Install the software two levels up from here
 (cd ../.. ; export TESTBED_ROOT=`pwd`)
@@ -31,7 +32,7 @@ sh -x $sw/bootstrap.sh setup -path $sw -arch $SCRAM_ARCH -repository $repo
 . $sw/$SCRAM_ARCH/external/apt/*/etc/profile.d/init.sh
 
 # Install PhEDEx from RPMs
-rpm=`apt-cache search "$PHEDEX_PKG" | sort | tail -1 | awk '{ print $1 }'`
+rpm=`apt-cache search "$PHEDEX_RPM" | sort | tail -1 | awk '{ print $1 }'`
 echo Installing $rpm
 apt-get -y install $rpm
 (cd $sw; rm -f phedex; ln -s $sw/$SCRAM_ARCH/cms/$PHEDEX_PKG/* phedex)

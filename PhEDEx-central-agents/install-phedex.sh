@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# What PhEDEx package do I want?
+PHEDEX_PKG=PHEDEX-admin
+PHEDEX_RPM=$PHEDEX_PKG
+
 # Install the software two levels up from here
 (cd ../.. ; export TESTBED_ROOT=`pwd`)
 echo "Set TESTBED_ROOT=$TESTBED_ROOT"
@@ -28,10 +32,10 @@ sh -x $sw/bootstrap.sh setup -path $sw -arch $SCRAM_ARCH -repository $repo
 . $sw/$SCRAM_ARCH/external/apt/*/etc/profile.d/init.sh
 
 # Install PhEDEx from RPMs
-rpm=`apt-cache search 'PHEDEX-admin' | sort | tail -1 | awk '{ print $1 }'`
+rpm=`apt-cache search "$PHEDEX_RPM" | sort | tail -1 | awk '{ print $1 }'`
 echo Installing $rpm
 apt-get -y install $rpm
-(cd $sw; rm -f phedex; ln -s $sw/$SCRAM_ARCH/cms/PHEDEX-admin/* phedex)
+(cd $sw; rm -f phedex; ln -s $sw/$SCRAM_ARCH/cms/$PHEDEX_PKG/* phedex)
 
 # Install the LifeCycle agent from RPMs
 rpm=`apt-cache search PHEDEX-lifecycle | sort | tail -1 | awk '{ print $1 }'`
@@ -52,7 +56,7 @@ apt-get -y install $rpm
 ) | tee -a $ENVIRONMENT >/dev/null
 
 # Now get HEAD from git to override RPM installations
-cd $sw/$SCRAM_ARCH/cms/PHEDEX-admin
+cd $sw/$SCRAM_ARCH/cms/$PHEDEX_PKG
 version=`ls -1 | tail -1`
 mv $version $version.rpm-installed
 branch=`echo $version | sed -e 's%-.*$%%'`
