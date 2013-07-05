@@ -43,15 +43,15 @@ export PHEDEX_GLITE_WRAPPER;
  -db              ${PHEDEX_DBPARAM}
  -accept	  '%Test%'
  -nodes           ${PHEDEX_NODE}
- -validate        ${PHEDEX_CONFIG}/fake-validate.pl
- -delete          ${PHEDEX_CONFIG}/fake-delete.pl
+ -validate        ${LIFECYCLE_ROOT}/Testbed/LifeCycle/fake-validate.pl
+ -delete          ${LIFECYCLE_ROOT}/Testbed/LifeCycle/fake-delete.pl
  -backend         Null
  -jobs            10
 
 ### AGENT LABEL=remove PROGRAM=Toolkit/Transfer/FileRemove DEFAULT=off
  -db              ${PHEDEX_DBPARAM}
  -nodes           ${PHEDEX_NODE}
- -delete          ${PHEDEX_CONFIG}/fake-delete.pl
+ -delete          ${LIFECYCLE_ROOT}/Testbed/LifeCycle/fake-delete.pl
  -protocol        'direct'
  -limit		  1000
  -jobs		  20
@@ -60,7 +60,7 @@ export PHEDEX_GLITE_WRAPPER;
  -db                    ${PHEDEX_DBPARAM}
  -nodes                 ${PHEDEX_NODE}
  -accept                '%'
- -validate              ${PHEDEX_CONFIG}/fake-validate.pl
+ -validate              ${LIFECYCLE_ROOT}/Testbed/LifeCycle/fake-validate.pl
  -backend               FTS
  -protocols             'srm'
  -service               ${TIER1_FTS_SERVER}
