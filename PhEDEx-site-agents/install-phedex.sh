@@ -63,7 +63,7 @@ git clone -b $branch https://github.com/dmwm/PHEDEX PHEDEX-git
 ln -s PHEDEX-git $version
 cd $version
 git checkout -b ANSE
-ln -s ../$version.rpm-installed/{etc,T0} .
+ln -s ../$version.rpm-installed/etc .
 
 cd $sw/$SCRAM_ARCH/cms/PHEDEX-lifecycle
 version=`ls -1 | tail -1`
@@ -73,7 +73,7 @@ git clone -b PHEDEX-LifeCycle https://github.com/dmwm/PHEDEX LifeCycle-git
 ln -s LifeCycle-git $version
 cd $version
 git checkout -b ANSE
-ln -s ../$version.rpm-installed/etc .
+ln -s ../$version.rpm-installed/{etc,T0} .
 mkdir bin
 cd bin
 ln -s `find .. -name '*.pl' | grep -v examples` .
