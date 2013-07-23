@@ -65,6 +65,9 @@ apt-get -y install $rpm
   echo export PHEDEX_DBPARAM=$TESTBED_ROOT/DBParam:Testbed2
   echo export SQLPATH=~/wildish/public:$SQLPATH
   echo export PHEDEX_SCRIPTS=$TESTBED_ROOT/lifecycle
+  echo ' '
+  echo "# You need to set this variable!"
+  echo "# export PHEDEX_SITE=InsertYourSiteNameHere"
 ) | tee -a $ENVIRONMENT >/dev/null
 
 echo "All done!"
