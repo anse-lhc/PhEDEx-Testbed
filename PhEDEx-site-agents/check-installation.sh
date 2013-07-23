@@ -24,7 +24,7 @@ else
   exit 0
 fi
 
-if [ `echo $PHEDEX_SITE | grep -c Buffer` -gt 0 ]; then
+if [ `echo $PHEDEX_SITE | grep -v Test | grep -c Buffer` -gt 0 ]; then
   echo "Your PHEDEX_SITE variable should not have the '_Buffer' extension"
   exit 0
 fi
