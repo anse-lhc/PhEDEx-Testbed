@@ -12,7 +12,7 @@ if [ `pwd` != $TESTBED_ROOT ]; then
 fi
 
 if [ ! -d ANSE-PhEDEx-Testbed ]; then
-  git clone git@github.com:anse-lhc/PhEDEx-Testbed.git ANSE-PhEDEx-Testbed
+  git clone https://github.com/anse-lhc/PhEDEx-Testbed.git ANSE-PhEDEx-Testbed
 fi
 
 ENVIRONMENT=$TESTBED_ROOT/env-anse.sh
