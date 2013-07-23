@@ -1,3 +1,4 @@
 DBParam*
 .bootstrap
 .vagrant
+vagrant.log
