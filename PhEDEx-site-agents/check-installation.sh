@@ -11,13 +11,13 @@ else
   exit 0
 fi
 
-if [ ! -f . $TESTBED_ROOT/env-anse.sh ]; then
+if [ ! -f $TESTBED_ROOT/env-anse.sh ]; then
   echo "Cannot find your \$TESTBED_ROOT/env-anse.sh file, did your installation work?"
   exit 0
 fi
 . $TESTBED_ROOT/env-anse.sh
 
-if [ -z "$PHEDEX_SITE" ]; then
+if [ ! -z "$PHEDEX_SITE" ]; then
   echo "PHEDEX_SITE set to $PHEDEX_SITE, good..."
 else
   echo "PHEDEX_SITE not defined. Did you set it in \$TESTBED_ROOT/env-anse.sh?"
@@ -28,7 +28,7 @@ if [ `echo $PHEDEX_SITE | grep -c Buffer` -gt 0 ]; then
   echo "Your PHEDEX_SITE variable should not have the '_Buffer' extension"
   exit 0
 fi
-if [ "$PHEDEX_SITE" -eq "InsertYourSiteNameHere" ]; then
+if [ "$PHEDEX_SITE" == "InsertYourSiteNameHere" ]; then
   echo "You have not defined the PHEDEX_SITE variable yet."
   echo "You need to set it in \$TESTBED_ROOT/env-anse.sh"
   exit 0
@@ -48,3 +48,6 @@ echo "Checking your database connection"
 $PHEDEX_ROOT/Utilities/Master --config Config.ANSE checkdb
 
 # Check lifecycle agent works? (not needed...)
+
+# Declare success!
+echo "If you see this message that means it all worked! You can now start your agents."

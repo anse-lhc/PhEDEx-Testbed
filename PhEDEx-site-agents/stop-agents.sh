@@ -6,8 +6,8 @@ if [ ! -d "$TESTBED_ROOT" ]; then
 fi
 
 . $TESTBED_ROOT/env-anse.sh
-$PHEDEX_ROOT/Utilities/Master --config Config.${PHEDEX_SITE}_Buffer stop
-for dir in $TESTBED_ROOT/Testbed2_${PHEDEX_SITE}_Buffer/state/*/
+$PHEDEX_ROOT/Utilities/Master --config Config.ANSE stop
+for dir in $TESTBED_ROOT/Testbed2_${PHEDEX_SITE}/state/*/
 do
   [ -f $dir/pid ]  && rm $dir/pid
   [ -f $dir/stop ] && rm $dir/stop

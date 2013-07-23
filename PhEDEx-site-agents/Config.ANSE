@@ -6,14 +6,11 @@
 #
 # PHEDEX_ANSE must point to the directory with this configuration file in it
 export PHEDEX_ANSE=/home/vagrant/TESTBED_ROOT/ANSE-PhEDEx-Testbed/PhEDEx-site-agents
-#
-# PHEDEX_SITE is the name of your site, without the '_Buffer' extension. E.g. T2_ANSE_CERN
-# PHEDEX_SITE=InsertSiteNameHere;
 
 #
 # Nothing below here needs to be configured yet. It should work as-is for a standalone
 # testbed with fake transfers
-PHEDEX_NODE=${PHEDEX_SITE}_Buffer;
+PHEDEX_NODE=${PHEDEX_SITE};
 PHEDEX_CONTEXT=${PHEDEX_SITE};
 
 # For the watchdog. Every different site must have a unique port number if you are
