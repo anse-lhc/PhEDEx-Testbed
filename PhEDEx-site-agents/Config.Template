@@ -8,7 +8,7 @@
 export PHEDEX_ANSE=/home/vagrant/TESTBED_ROOT/ANSE-PhEDEx-Testbed/PhEDEx-site-agents
 #
 # PHEDEX_SITE is the name of your site, without the '_Buffer' extension. E.g. T2_ANSE_CERN
-PHEDEX_SITE=_insert_site_name_here;
+PHEDEX_SITE=InsertSiteNameHere;
 
 #
 # Nothing below here needs to be configured yet. It should work as-is for a standalone
