@@ -1,0 +1,75 @@
+#### General configuration
+### ENVIRON common
+
+# Common part
+# These next few values need to be set correctly
+#
+# PHEDEX_ANSE must point to the directory with this configuration file in it
+export PHEDEX_ANSE=/home/vagrant/TESTBED_ROOT/ANSE-PhEDEx-Testbed/PhEDEx-site-agents
+
+#
+# Nothing below here needs to be configured yet. It should work as-is for a standalone
+# testbed with fake transfers
+PHEDEX_NODE=${PHEDEX_SITE};
+PHEDEX_CONTEXT=${PHEDEX_SITE};
+
+# For the watchdog. Every different site must have a unique port number if you are
+# running more than one site per machine. You almost certainly aren't doing that
+PHEDEX_NOTIFICATION_PORT=22101;
+export PHEDEX_NOTIFICATION_PORT;
+
+# FTS specific part
+TIER1_FTS_SERVER=https://fts-t1-import.cern.ch:8443/glite-data-transfer-fts/services/FileTransfer;
+export TIER1_FTS_SERVER;
+
+PHEDEX_MAP=${PHEDEX_ANSE}/tfc.xml;
+export PHEDEX_MAP;
+
+PHEDEX_GLITE_WRAPPER=${LIFECYCLE_ROOT}/Testbed/FakeFTS.pl;
+export PHEDEX_GLITE_WRAPPER;
+
+### IMPORT ConfigPart.Testbed
+
+### AGENT LABEL=watchdog PROGRAM=Utilities/AgentFactory.pl
+ -db         ${PHEDEX_DBPARAM}
+ -config     ${PHEDEX_CONFIG_FILE}
+ -agent_list exp-pfn
+ -agent_list download-fts
+ -agent_list remove
+
+### AGENT LABEL=exp-pfn PROGRAM=Toolkit/Transfer/FileExport
+ -db          ${PHEDEX_DBPARAM}
+ -nodes       ${PHEDEX_NODE}
+ -storagemap  ${PHEDEX_MAP}
+ -protocols   'srm','direct'
+
+### AGENT LABEL=download PROGRAM=Toolkit/Transfer/FileDownload DEFAULT=off
+ -verbose
+ -db              ${PHEDEX_DBPARAM}
+ -accept	  '%Test%'
+ -nodes           ${PHEDEX_NODE}
+ -validate        ${LIFECYCLE_ROOT}/Testbed/LifeCycle/fake-validate.pl
+ -delete          ${LIFECYCLE_ROOT}/Testbed/LifeCycle/fake-delete.pl
+ -backend         Null
+ -jobs            10
+
+### AGENT LABEL=remove PROGRAM=Toolkit/Transfer/FileRemove DEFAULT=off
+ -db              ${PHEDEX_DBPARAM}
+ -nodes           ${PHEDEX_NODE}
+ -delete          ${LIFECYCLE_ROOT}/Testbed/LifeCycle/fake-delete.pl
+ -protocol        'direct'
+ -limit		  1000
+ -jobs		  20
+
+### AGENT LABEL=download-fts PROGRAM=Toolkit/Transfer/FileDownload
+ -db                    ${PHEDEX_DBPARAM}
+ -nodes                 ${PHEDEX_NODE}
+ -accept                '%'
+ -validate              ${LIFECYCLE_ROOT}/Testbed/LifeCycle/fake-validate.pl
+ -backend               FTS
+ -protocols             'srm'
+ -service               ${TIER1_FTS_SERVER}
+ -batch-files           50
+ -link-pending-files    200
+ -jobs			2
+ -job-awol		300
