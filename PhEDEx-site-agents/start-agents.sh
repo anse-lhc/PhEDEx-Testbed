@@ -6,4 +6,4 @@ if [ ! -d "$TESTBED_ROOT" ]; then
 fi
 
 . $TESTBED_ROOT/env-anse.sh
-$PHEDEX_ROOT/Utilities/Master --config Config.InsertSiteNameHere_Buffer start watchdog
+$PHEDEX_ROOT/Utilities/Master --config Config.${PHEDEX_SITE}_Buffer start watchdog
