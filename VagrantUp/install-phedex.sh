@@ -70,4 +70,5 @@ apt-get -y install $rpm
   echo "# export PHEDEX_SITE=InsertYourSiteNameHere"
 ) | tee -a $ENVIRONMENT >/dev/null
 
+echo '. /home/vagrant/TESTBED_ROOT/env-anse.sh' >> ~/.bashrc
 echo "All done!"
