@@ -58,6 +58,7 @@ apt-get -y install $rpm
   echo '[ -f /afs/cern.ch/cms/LCG/LCG-2/UI/cms_ui_env.sh ] && \'
   echo '  . /afs/cern.ch/cms/LCG/LCG-2/UI/cms_ui_env.sh'
   echo . $TESTBED_ROOT/phedex/etc/profile.d/init.sh
+  echo . $TESTBED_ROOT/lifecycle/etc/profile.d/init.sh
   echo export PHEDEX_ROOT=$TESTBED_ROOT/phedex
   echo export SCHEMA_ROOT=$TESTBED_ROOT/phedex/Schema
   echo export TNS_ADMIN=$TESTBED_ROOT/phedex/Schema
