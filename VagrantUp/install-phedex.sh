@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export TESTBED_ROOT=/home/vagrant/TESTBED_ROOT
+export TESTBED_ROOT=$HOME/TESTBED_ROOT
 if [ ! -d "$TESTBED_ROOT" ]; then
   echo "TESTBED_ROOT not a directory. Creating it..."
   mkdir TESTBED_ROOT
@@ -70,5 +70,5 @@ apt-get -y install $rpm
   echo "# export PHEDEX_SITE=InsertYourSiteNameHere"
 ) | tee -a $ENVIRONMENT >/dev/null
 
-echo '. /home/vagrant/TESTBED_ROOT/env-anse.sh' >> ~/.bashrc
+echo '. $HOME/TESTBED_ROOT/env-anse.sh' >> ~/.bashrc
 echo "All done!"
