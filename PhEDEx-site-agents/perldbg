@@ -1,0 +1,3 @@
+# Use this to pre-set breakpoints etc when using the PHEDEX::Debugger module
+b PHEDEX::File::Download::Agent::new
+b PHEDEX::File::Download::Agent::fetch_tasks
