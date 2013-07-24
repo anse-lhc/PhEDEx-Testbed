@@ -3,8 +3,8 @@
 # Create the ANSE nodes in the database
 #
 
-#datasvc=https://brazil.accre.vanderbilt.edu:4443/phedex/datasvc/perl/prod
-datasvc=https://phedex-web-dev.cern.ch/phedex/datasvc/perl/tbedii
+datasvc=https://brazil.accre.vanderbilt.edu:4443/phedex/datasvc/perl/prod
+#datasvc=https://phedex-web-dev.cern.ch/phedex/datasvc/perl/tbedii
 
 if [ -z $PHEDEX_ROOT ]; then
   echo "$PHEDEX_ROOT not set, are you sure you sourced the environment?"
