@@ -47,14 +47,7 @@ else
 fi
 
 # Create nodes / links
-#$PHEDEX_ROOT/Utilities/NodeNew -db $PHEDEX_DBPARAM -name T0_Test_Buffer \
-#        -kind Buffer -technology Other -se-name srm.test0.ch
-#$PHEDEX_ROOT/Utilities/NodeNew -db $PHEDEX_DBPARAM -name T2_Test1_Buffer \
-#        -kind Buffer -technology Other -se-name srm.test1.ch
-#$PHEDEX_ROOT/Utilities/NodeNew -db $PHEDEX_DBPARAM -name T2_Test2_Buffer \
-#        -kind Buffer -technology Other -se-name srm.test2.ch
-#$PHEDEX_ROOT/Utilities/LinkNew -db $PHEDEX_DBPARAM T2_Test1_Buffer T2_Test2_Buffer:R/2
-
+echo "Create/verify nodes and links"
 cd $TESTBED_ROOT/ANSE-PhEDEx-Testbed/PhEDEx-admin
 ./create-nodes.sh
 
@@ -68,5 +61,6 @@ do
 done
 echo "groups inserted"
 
+echo "Now read the nodes and groups for the benefit of the LifeCycle agent"
 $LIFECYCLE/getNodesGroups.sh
 echo ANSE-node setup completed
