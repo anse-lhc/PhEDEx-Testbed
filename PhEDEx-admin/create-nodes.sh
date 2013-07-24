@@ -18,7 +18,7 @@ fi
 # List of locations in the testbed
 ANSE=( CERN Caltech Michigan Vanderbilt UTA )
 Test=( Test1 Test2 Test3 Test4 )
-locations=()
+locations=( T0_Test_Buffer )
 for i in ${ANSE[*]}
 do
   locations=("${locations[@]}" "T2_ANSE_${i}")
