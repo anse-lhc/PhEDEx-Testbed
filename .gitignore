@@ -2,3 +2,4 @@ DBParam*
 .bootstrap
 .vagrant
 vagrant.log
+*.pid
