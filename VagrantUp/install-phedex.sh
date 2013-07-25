@@ -64,12 +64,12 @@ apt-get -y install $rpm
   echo export TNS_ADMIN=$TESTBED_ROOT/phedex/Schema
   echo export PHEDEX_DBPARAM=$TESTBED_ROOT/DBParam:Testbed2
   echo export SQLPATH=~/wildish/public:$SQLPATH
-  echo export PHEDEX_SCRIPTS=$TESTBED_ROOT/lifecycle
+  echo export PHEDEX_SCRIPTS=$TESTBED_ROOT/phedex
   echo export ANSE_ROOT=$TESTBED_ROOT/ANSE-PhEDEx-Testbed
   echo ' '
   echo "# You need to set this variable!"
   echo "# export PHEDEX_SITE=InsertYourSiteNameHere"
 ) | tee -a $ENVIRONMENT >/dev/null
 
-echo '. $HOME/TESTBED_ROOT/env-anse.sh' >> ~/.bashrc
+echo "[ -f $TESTBED_ROOT/end-anse.sh ] && . $TESTBED_ROOT/env-anse.sh" >> ~/.bashrc
 echo "All done!"
