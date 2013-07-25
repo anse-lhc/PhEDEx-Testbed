@@ -5,7 +5,7 @@
 # These next few values need to be set correctly
 #
 # PHEDEX_ANSE must point to the directory with this configuration file in it
-export PHEDEX_ANSE=/home/vagrant/TESTBED_ROOT/ANSE-PhEDEx-Testbed/PhEDEx-site-agents
+export PHEDEX_ANSE=${TESTBED_ROOT}/ANSE-PhEDEx-Testbed/PhEDEx-site-agents
 
 #
 # Nothing below here needs to be configured yet. It should work as-is for a standalone
