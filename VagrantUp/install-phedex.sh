@@ -71,5 +71,5 @@ apt-get -y install $rpm
   echo "# export PHEDEX_SITE=InsertYourSiteNameHere"
 ) | tee -a $ENVIRONMENT >/dev/null
 
-echo '. $HOME/TESTBED_ROOT/env-anse.sh' >> ~/.bashrc
+echo "[ -f $TESTBED_ROOT/end-anse.sh ] && . $TESTBED_ROOT/env-anse.sh" >> ~/.bashrc
 echo "All done!"
