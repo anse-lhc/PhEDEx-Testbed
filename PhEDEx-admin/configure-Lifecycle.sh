@@ -62,5 +62,6 @@ done
 echo "groups inserted"
 
 echo "Now read the nodes and groups for the benefit of the LifeCycle agent"
+export SQLPATH=$TESTBED_ROOT/ANSE-PhEDEx-Testbed/PhEDEx-admin
 $LIFECYCLE/getNodesGroups.sh
 echo ANSE-node setup completed

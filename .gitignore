@@ -2,4 +2,5 @@ DBParam*
 .bootstrap
 .vagrant
 vagrant.log
+sqlnet.log
 *.pid
