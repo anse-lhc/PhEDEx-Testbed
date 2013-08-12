@@ -35,7 +35,7 @@ do
     $PHEDEX_ROOT/Utilities/NodeNew \
 	-db $PHEDEX_DBPARAM \
 	-name $node \
-	-kind Buffer \
+	-kind Disk \
 	-technology Other \
 	-se-name $node.se.anse.org
   else
