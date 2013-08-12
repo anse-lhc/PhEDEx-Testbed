@@ -23,8 +23,6 @@ fi
 
 PHEDEX_SQLPLUS="sqlplus $($PHEDEX_ROOT/Utilities/OracleConnectId -db $PHEDEX_DBPARAM)"
 PHEDEX_SQLPLUS_CLEAN=`echo $PHEDEX_SQLPLUS | sed -e's%/.*@%/password-here@%'`
-echo "PHEDEX_SQLPLUS=$PHEDEX_SQLPLUS"
-echo "PHEDEX_SQLPLUS_CLEAN=$PHEDEX_SQLPLUS_CLEAN"
 # Minimal sanity-check on the DBPARAM and contents:
 if [ `echo $PHEDEX_DBPARAM | egrep -ic 'prod|dev|debug|admin'` -gt 0 ]; then
   echo "Your DBParam appears to be unsafe?"
