@@ -35,6 +35,7 @@
 ### AGENT LABEL=mgmt-router PROGRAM=Toolkit/Infrastructure/FileRouter ENVIRON=phedex
  -db             ${PHEDEX_DBPARAM}
  -request-alloc  BY_AGE
+ -window-size	 15
 
 ### AGENT LABEL=mgmt-pump PROGRAM=Toolkit/Infrastructure/FilePump ENVIRON=phedex
  -db        ${PHEDEX_DBPARAM}
