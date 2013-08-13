@@ -15,7 +15,7 @@ PHEDEX_CONTEXT=${PHEDEX_SITE};
 
 # For the watchdog. Every different site must have a unique port number if you are
 # running more than one site per machine. You almost certainly aren't doing that
-PHEDEX_NOTIFICATION_PORT=22101;
+PHEDEX_NOTIFICATION_PORT=22102;
 export PHEDEX_NOTIFICATION_PORT;
 
 # FTS specific part
@@ -54,13 +54,13 @@ export PHEDEX_GLITE_WRAPPER;
  -batch-files     50
  -jobs            10
 
-### AGENT LABEL=remove PROGRAM=Toolkit/Transfer/FileRemove DEFAULT=off
+### AGENT LABEL=remove PROGRAM=Toolkit/Transfer/FileRemove
  -db              ${PHEDEX_DBPARAM}
  -nodes           ${PHEDEX_NODE}
  -delete          ${ANSE_ROOT}/PhEDEx-site-agents/fake-delete.pl
  -protocol        'direct'
  -limit		  1000
- -jobs		  20
+ -jobs		  50
 
 ### AGENT LABEL=download-fts PROGRAM=Toolkit/Transfer/FileDownload
  -db                    ${PHEDEX_DBPARAM}
@@ -71,6 +71,6 @@ export PHEDEX_GLITE_WRAPPER;
  -protocols             'srm'
  -service               ${TIER1_FTS_SERVER}
  -batch-files           50
- -link-pending-files    200
- -jobs			2
- -job-awol		300
+ -link-pending-files    2000
+ -jobs			10
+ -job-awol		3600
