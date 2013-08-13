@@ -14,7 +14,8 @@ print  "file: $filename\n";
 ($filename =~ /-stuckfile$/) && print "Matches STUCK file\n";
 
 if ($status eq 'pre') {
-  print "fake validation success\n";
+  print "fake validation failure\n";
+  exit -1;
 } else {
   print "post-validation success\n";
 }
