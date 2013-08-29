@@ -7,7 +7,7 @@ datasvc=https://brazil.accre.vanderbilt.edu:4443/phedex/datasvc/perl/prod
 #datasvc=https://phedex-web-dev.cern.ch/phedex/datasvc/perl/tbedii
 
 if [ -z $PHEDEX_ROOT ]; then
-  echo "$PHEDEX_ROOT not set, are you sure you sourced the environment?"
+  echo "PHEDEX_ROOT not set, are you sure you sourced the environment?"
   exit 0
 fi
 if [ -z $PHEDEX_DBPARAM ]; then
@@ -16,7 +16,7 @@ if [ -z $PHEDEX_DBPARAM ]; then
 fi
 
 # List of locations in the testbed
-ANSE=( CERN Caltech Michigan Vanderbilt UTA )
+ANSE=( CERN Caltech Indiana Michigan Vanderbilt UTA )
 Test=( Test1 Test2 Test3 Test4 )
 locations=( T0_Test_Buffer )
 for i in ${ANSE[*]}

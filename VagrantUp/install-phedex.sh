@@ -3,7 +3,7 @@
 export TESTBED_ROOT=$HOME/TESTBED_ROOT
 if [ ! -d "$TESTBED_ROOT" ]; then
   echo "TESTBED_ROOT not a directory. Creating it..."
-  mkdir TESTBED_ROOT
+  mkdir -p $TESTBED_ROOT
 fi
 cd $TESTBED_ROOT
 if [ `pwd` != $TESTBED_ROOT ]; then
