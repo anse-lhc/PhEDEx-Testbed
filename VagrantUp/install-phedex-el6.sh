@@ -1,9 +1,11 @@
 #!/bin/sh
 
-export TESTBED_ROOT=$HOME/TESTBED_ROOT
+# You need to change this in order to match where you want your folder to be
+# export TESTBED_ROOT=$HOME/TESTBED_ROOT
+export TESTBED_ROOT=/data/TESTBED_ROOT
 if [ ! -d "$TESTBED_ROOT" ]; then
   echo "TESTBED_ROOT not a directory. Creating it..."
-  mkdir TESTBED_ROOT
+  mkdir $TESTBED_ROOT
 fi
 cd $TESTBED_ROOT
 if [ `pwd` != $TESTBED_ROOT ]; then
@@ -16,8 +18,8 @@ if [ ! -d ANSE-PhEDEx-Testbed ]; then
 fi
 
 ENVIRONMENT=$TESTBED_ROOT/env-anse.sh
-export SCRAM_ARCH=slc5_amd64_gcc461
-export repo=comp.pre.wildish # for now, should be comp later on
+export SCRAM_ARCH=slc6_amd64_gcc461
+export repo=comp.pre # for now, should be comp later on
 export sw=$TESTBED_ROOT/sw
 [ -d $sw ] && echo "Removing old sw installation..." && rm -rf $sw
 mkdir -p $sw
@@ -66,9 +68,7 @@ apt-get -y install $rpm
   echo export SQLPATH=~/wildish/public:$SQLPATH
   echo export PHEDEX_SCRIPTS=$TESTBED_ROOT/phedex
   echo export ANSE_ROOT=$TESTBED_ROOT/ANSE-PhEDEx-Testbed
-  echo ' '
-  echo "# You need to set this variable!"
-  echo "# export PHEDEX_SITE=InsertYourSiteNameHere"
+  echo export PHEDEX_SITE=T2_ANSE_CERN_HERMES
 ) | tee -a $ENVIRONMENT >/dev/null
 
 echo "[ -f $TESTBED_ROOT/end-anse.sh ] && . $TESTBED_ROOT/env-anse.sh" >> ~/.bashrc
