@@ -1,8 +1,8 @@
 #!/bin/sh
 
 # You need to change this in order to match where you want your folder to be
-# export TESTBED_ROOT=$HOME/TESTBED_ROOT
-export TESTBED_ROOT=/data/TESTBED_ROOT
+export TESTBED_ROOT=$HOME/TESTBED_ROOT
+# export TESTBED_ROOT=/data/TESTBED_ROOT
 if [ ! -d "$TESTBED_ROOT" ]; then
   echo "TESTBED_ROOT not a directory. Creating it..."
   mkdir $TESTBED_ROOT
@@ -26,13 +26,17 @@ mkdir -p $sw
 
 ( 
   echo "unset \`set | awk -F= '{ print \$1 }' | sort | egrep -a '_ROOT\$'\`"
+  echo
+  echo "# Change here if you want to use a new location for your testbed"
   echo export TESTBED_ROOT=$TESTBED_ROOT
+  echo
   echo unset PERL5LIB LD_LIBRARY_PATH PYTHONPATH PATH SQLPATH ORACLE_HOME
   echo export PATH=/bin:/usr/bin
   echo export SCRAM_ARCH=$SCRAM_ARCH
   echo export sw=$sw
-  echo export LIFECYCLE_ROOT=$TESTBED_ROOT/lifecycle
-  echo export LIFECYCLE=$TESTBED_ROOT/lifecycle/Testbed/LifeCycle
+  echo export LIFECYCLE_ROOT='$TESTBED_ROOT'/lifecycle
+  echo export LIFECYCLE='$LIFECYCLE_ROOT'/Testbed/LifeCycle
+  echo 
 ) | tee $ENVIRONMENT
 
 # Base installation
@@ -57,18 +61,25 @@ apt-get -y install $rpm
 	ln -s $sw/$SCRAM_ARCH/cms/PHEDEX-lifecycle/* lifecycle )
 
 (
-  echo '[ -f /afs/cern.ch/cms/LCG/LCG-2/UI/cms_ui_env.sh ] && \'
-  echo '  . /afs/cern.ch/cms/LCG/LCG-2/UI/cms_ui_env.sh'
-  echo . $TESTBED_ROOT/phedex/etc/profile.d/init.sh
-  echo . $TESTBED_ROOT/lifecycle/etc/profile.d/init.sh
-  echo export PHEDEX_ROOT=$TESTBED_ROOT/phedex
-  echo export SCHEMA_ROOT=$TESTBED_ROOT/phedex/Schema
-  echo export TNS_ADMIN=$TESTBED_ROOT/phedex/Schema
-  echo export PHEDEX_DBPARAM=$TESTBED_ROOT/DBParam:Testbed2
-  echo export SQLPATH=~/wildish/public:$SQLPATH
-  echo export PHEDEX_SCRIPTS=$TESTBED_ROOT/phedex
-  echo export ANSE_ROOT=$TESTBED_ROOT/ANSE-PhEDEx-Testbed
-  echo export PHEDEX_SITE=T2_ANSE_CERN_HERMES
+  echo export PHEDEX_ROOT='$TESTBED_ROOT'/phedex
+  echo 
+  echo . '$PHEDEX_ROOT'/etc/profile.d/init.sh
+  echo . '$LIFECYCLE_ROOT'/etc/profile.d/init.sh
+  echo
+  echo PYTHONPATH='$PYTHONPATH':/usr/lib/python2.6/site-packages:/usr/lib64/python2.6/site-packages/
+  echo
+  echo "# DB related items"
+  echo export SCHEMA_ROOT='$PHEDEX_ROOT'/Schema
+  echo export TNS_ADMIN='$PHEDEX_ROOT'/Schema
+  echo
+  echo "# Change here if you want to use a different instance"
+  echo export PHEDEX_INSTANCE=SuperComputingTestbed
+  echo export PHEDEX_DBPARAM='$TESTBED_ROOT'/DBParam:'$PHEDEX_INSTANCE'
+  echo export PHEDEX_SCRIPTS='$PHEDEX_ROOT'
+  echo export ANSE_ROOT='$TESTBED_ROOT'/ANSE-PhEDEx-Testbed
+  echo 
+  echo "# You need to set this variable!"
+  echo "# export PHEDEX_SITE=InsertYourSiteNameHere"
 ) | tee -a $ENVIRONMENT >/dev/null
 
 echo "[ -f $TESTBED_ROOT/end-anse.sh ] && . $TESTBED_ROOT/env-anse.sh" >> ~/.bashrc
